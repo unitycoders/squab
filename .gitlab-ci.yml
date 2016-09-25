@@ -79,7 +79,7 @@ package:jdk8:
   # Use stage test here, so the pages job may later pickup the created site.
   stage: test
   script:
-    - 'mvn $MAVEN_CLI_OPTS package site site:stage'
+    - 'mvn $MAVEN_CLI_OPTS package'
   only:
     - master
   # Archive up the built documentation site.
@@ -89,18 +89,19 @@ package:jdk8:
   image: maven:3.3.9-jdk-8
 
 
-pages:
-  image: busybox:latest
-  stage: deploy
-  script:
-    # Because Maven appends the artifactId automatically to the staging path if you did define a parent pom,
-    # you might need to use `mv target/staging/YOUR_ARTIFACT_ID public` instead.
-    - mv target/staging public
-  dependencies:
-    - package:jdk8
-  artifacts:
-    paths:
-    - public
-  only:
-    - master
+## Pages is enterise only until we develop a work-around
+#pages:
+#  image: busybox:latest
+#  stage: deploy
+#  script:
+#    # Because Maven appends the artifactId automatically to the staging path if you did define a parent pom,
+#    # you might need to use `mv target/staging/YOUR_ARTIFACT_ID public` instead.
+#    - mv target/staging public
+#  dependencies:
+#    - package:jdk8
+#  artifacts:
+#    paths:
+#    - public
+#  only:
+#    - master
 
