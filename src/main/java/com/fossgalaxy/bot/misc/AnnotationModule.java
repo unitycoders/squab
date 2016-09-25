@@ -35,6 +35,11 @@ public class AnnotationModule implements Module {
         return node.invoke(context, request);
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
     protected void bind(){
         Method[] methodList = MethodUtils.getMethodsWithAnnotation(getClass(), Command.class);
         if (methodList.length == 0) {

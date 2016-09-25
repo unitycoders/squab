@@ -11,7 +11,7 @@ import java.util.Map;
 public class HelloWorld extends AnnotationModule {
 
     public HelloWorld() {
-        super("name");
+        super("hello");
     }
 
     @Command("hello")

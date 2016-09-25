@@ -10,4 +10,6 @@ public interface Module {
     default void init() {}
 
     String execute(Map map, Object object);
+
+    String getName();
 }
