@@ -17,6 +17,13 @@
     <project.main>com.fossgalaxy.bot.App</project.main>
   </properties>
 
+  <distributionManagement>
+    <site>
+      <id>fossgalaxy.website.static</id>
+      <url>scp://docs.fossgalaxy.com/srv/public_sites/${project.artifactId}</url>
+    </site>
+  </distributionManagement>
+
   <build>
     <plugins>
       <!-- other bits here -->
@@ -32,6 +39,18 @@
             </manifest>
           </archive>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.5.1</version>
+        <dependencies>
+          <dependency><!-- add support for ssh/scp -->
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-ssh</artifactId>
+            <version>1.0</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
