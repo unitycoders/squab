@@ -1,6 +1,8 @@
 package com.fossgalaxy.bot.api.module;
 
 import com.fossgalaxy.bot.api.Module;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,9 @@ import java.util.Map;
 public class ModuleCatalogue {
     private final Map<String, Module> modules;
 
+    @Inject
+    private Injector injector;
+
     public ModuleCatalogue() {
         this.modules = new HashMap<>();
     }
@@ -21,7 +26,6 @@ public class ModuleCatalogue {
         try {
             Class<?> moduleClazz = Class.forName(className);
             Module module = (Module) moduleClazz.newInstance();
-            module.init();
             register(module.getName(), module);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -33,6 +37,9 @@ public class ModuleCatalogue {
     public void register(String name, Module module) {
         assert name != null;
         assert module != null;
+
+        injector.injectMembers(module);
+        module.init();
 
         modules.put(name, module);
     }

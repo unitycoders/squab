@@ -7,8 +7,10 @@ import com.fossgalaxy.bot.api.Response;
 import com.fossgalaxy.bot.api.module.AnnotationModule;
 import com.fossgalaxy.bot.api.module.Shortcuts;
 import com.fossgalaxy.bot.backend.Backend;
+import com.fossgalaxy.bot.backend.netty.irc.NettyIRCClientBackend;
 import com.fossgalaxy.bot.model.MUCStorage;
 import com.fossgalaxy.bot.model.MultiUserChat;
+import com.google.inject.Inject;
 
 /**
  * Created by webpigeon on 25/09/16.
@@ -17,9 +19,13 @@ public class IRCModule extends AnnotationModule {
     private Backend ircBackend;
     private MUCStorage store;
 
-    public IRCModule(Backend ircBackend, MUCStorage store) {
+    public IRCModule() {
         super("irc");
-        this.ircBackend = ircBackend;
+    }
+
+    @Inject
+    public void injectRequirements(NettyIRCClientBackend backend, MUCStorage store) {
+        this.ircBackend = backend;
         this.store = store;
     }
 

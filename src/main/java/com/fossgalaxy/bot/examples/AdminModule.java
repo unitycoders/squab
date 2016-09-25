@@ -17,6 +17,5 @@ public class AdminModule extends AnnotationModule {
 
     @Command("shutdown")
     public void onShutdown(Context ctx, Request request) {
-        App.shutdownBot();
     }
 }

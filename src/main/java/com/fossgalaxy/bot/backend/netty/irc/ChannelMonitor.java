@@ -3,6 +3,7 @@ package com.fossgalaxy.bot.backend.netty.irc;
 import com.fossgalaxy.bot.backend.netty.EventDispatcher;
 import com.fossgalaxy.bot.model.MUCStorage;
 import com.fossgalaxy.bot.model.MultiUserChat;
+import com.google.inject.Inject;
 
 import java.util.Arrays;
 
@@ -12,10 +13,12 @@ import java.util.Arrays;
 public class ChannelMonitor {
     private MUCStorage store;
 
+    @Inject
     public ChannelMonitor(MUCStorage store) {
         this.store = store;
     }
 
+    @Inject
     public void bind(EventDispatcher<IRCEvent> dispatcher) {
         dispatcher.register("JOIN", this::onJoin);
         dispatcher.register("PART", this::onPart);

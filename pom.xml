@@ -83,6 +83,13 @@
       <scope>compile</scope>
     </dependency>
 
+    <!-- google guice -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>4.1.0</version>
+    </dependency>
+
     <!-- Apache Commons -->
     <dependency>
       <groupId>org.apache.commons</groupId>

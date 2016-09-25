@@ -1,5 +1,7 @@
 package com.fossgalaxy.bot.model;
 
+import com.google.inject.Singleton;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -7,6 +9,7 @@ import java.util.Set;
 /**
  * Created by webpigeon on 25/09/16.
  */
+@Singleton
 public class MUCStorage {
     private final Map<String, MultiUserChat> chat;
 

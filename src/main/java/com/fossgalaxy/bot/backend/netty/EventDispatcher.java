@@ -1,5 +1,7 @@
 package com.fossgalaxy.bot.backend.netty;
 
+import com.google.inject.Singleton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.function.Consumer;
 /**
  * Created by webpigeon on 25/09/16.
  */
+@Singleton
 public class EventDispatcher<T> {
     private final Map<String, List<Consumer<T>>> callbacks;
 

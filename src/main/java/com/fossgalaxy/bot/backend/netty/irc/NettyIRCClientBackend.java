@@ -3,6 +3,7 @@ package com.fossgalaxy.bot.backend.netty.irc;
 import com.fossgalaxy.bot.backend.Backend;
 import com.fossgalaxy.bot.backend.Dispatcher;
 import com.fossgalaxy.bot.backend.netty.EventDispatcher;
+import com.google.inject.Inject;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -19,15 +20,19 @@ import io.netty.util.CharsetUtil;
 public class NettyIRCClientBackend implements Backend {
 
     private final Dispatcher dispatcher;
-    private final String hostname;
-    private final int port;
+    private String hostname;
+    private int port;
     private final EventDispatcher<IRCEvent> eventDispatcher;
 
     private Channel channel;
 
-    public NettyIRCClientBackend(String hostname, int port, EventDispatcher<IRCEvent> ed, Dispatcher dispatcher) {
+    @Inject
+    public NettyIRCClientBackend(EventDispatcher<IRCEvent> ed, Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
         this.eventDispatcher = ed;
+    }
+
+    public void connect(String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
     }

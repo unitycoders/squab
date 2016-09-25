@@ -32,7 +32,7 @@ public class IRCEventHandler extends SimpleChannelInboundHandler<IRCEvent> {
                 handleRequest(ctx, s);
                 break;
             case "PING":
-                ctx.writeAndFlush(String.format("PONG :%s\r\n", s.args.get(0)));
+                ctx.writeAndFlush(String.format("PONG :%s\r\n", s.getArg(0)));
                 break;
         }
 
@@ -42,7 +42,7 @@ public class IRCEventHandler extends SimpleChannelInboundHandler<IRCEvent> {
         assert "PRIVMSG".equals(event.command);
 
         UserMask mask = UserMask.parse(event.prefix);
-        String target = event.args.get(0);
+        String target = event.getArg(0);
 
         Context ctx = new DefaultContext();
         ctx.put(Context.USER, mask.nick);
@@ -54,7 +54,7 @@ public class IRCEventHandler extends SimpleChannelInboundHandler<IRCEvent> {
             ctx.put(Context.REPLY_TO, mask.nick);
         }
 
-        String request = event.args.get(1);
+        String request = event.getArg(1);
 
         //IRC Specific:
         ctx.put("irc.mask", mask);
