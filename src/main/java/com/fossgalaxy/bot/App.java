@@ -2,6 +2,8 @@ package com.fossgalaxy.bot;
 
 import com.fossgalaxy.bot.api.*;
 import com.fossgalaxy.bot.api.module.ModuleCatalogue;
+import com.fossgalaxy.bot.backend.ConsoleBackend;
+import com.fossgalaxy.bot.backend.Dispatcher;
 import com.fossgalaxy.bot.config.ConfigFactory;
 import com.fossgalaxy.bot.impl.DefaultContext;
 import com.fossgalaxy.bot.impl.DefaultRequest;
@@ -25,25 +27,10 @@ public class App
         ModuleCatalogue catalogue = new ModuleCatalogue();
         modules.forEach(catalogue::load);
 
-        //build a context for the dummy requests
-        Context ctx = new DefaultContext();
-        ctx.put(Context.USER, "testUser");
-        ctx.put("modules", cfg.getList(String.class, "modules"));
-
-        CommandParser parser = new CommandParser();
-        System.out.println(parser.parse("hello world"));
-        System.out.println(parser.parse("hello 'world with space'"));
-        System.out.println(parser.parse("hello \"world with space\""));
-
-
-        String[] inputs = {"hello hello", "hello helloTemplate", "hello helloFormat", "notDefined hello", "hello notDefined", "hello", ""};
-        for (String input : inputs) {
-            try {
-                doRequest(ctx, parser.parse(input), catalogue);
-            } catch (InvalidRequestException ex) {
-                System.out.println(String.format("got %s (%s) when processing '%s'", ex.getClass(), ex.getMessage(), input));
-            }
-        }
+        //create an interactive prompt for the bot
+        Dispatcher dispatcher = new Dispatcher(new CommandParser(), catalogue);
+        ConsoleBackend backend = new ConsoleBackend(dispatcher);
+        backend.run();
     }
 
     public static void doRequest(Context context, Request request, ModuleCatalogue catalogue) {
