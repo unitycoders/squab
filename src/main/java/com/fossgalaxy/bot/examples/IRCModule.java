@@ -7,16 +7,20 @@ import com.fossgalaxy.bot.api.Response;
 import com.fossgalaxy.bot.api.module.AnnotationModule;
 import com.fossgalaxy.bot.api.module.Shortcuts;
 import com.fossgalaxy.bot.backend.Backend;
+import com.fossgalaxy.bot.model.MUCStorage;
+import com.fossgalaxy.bot.model.MultiUserChat;
 
 /**
  * Created by webpigeon on 25/09/16.
  */
 public class IRCModule extends AnnotationModule {
     private Backend ircBackend;
+    private MUCStorage store;
 
-    public IRCModule(Backend ircBackend) {
+    public IRCModule(Backend ircBackend, MUCStorage store) {
         super("irc");
         this.ircBackend = ircBackend;
+        this.store = store;
     }
 
     @Command("raw")
@@ -24,5 +28,17 @@ public class IRCModule extends AnnotationModule {
         String message = request.getArgument(0);
         ircBackend.sendRaw(message);
         return Shortcuts.respondSuccess();
+    }
+
+    @Command("users")
+    public Response doUsers(Context ctx, Request request) {
+        String roomName = request.getArgument(0);
+        MultiUserChat room = store.getChat("irc", roomName);
+        return Shortcuts.respondFormatted("users are: %s", String.join(", ", room.users));
+    }
+
+    @Command("channels")
+    public Response doChannels(Context ctx, Request request) {
+        return Shortcuts.respondFormatted("channels are: %s", String.join(", ", store.getKeys()));
     }
 }

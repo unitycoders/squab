@@ -3,18 +3,18 @@ package com.fossgalaxy.bot;
 import com.fossgalaxy.bot.api.Module;
 import com.fossgalaxy.bot.api.module.ModuleCatalogue;
 import com.fossgalaxy.bot.backend.*;
-import com.fossgalaxy.bot.backend.netty.EventDispatcher;
-import com.fossgalaxy.bot.backend.netty.IRCEvent;
-import com.fossgalaxy.bot.backend.netty.NettyIRCClientBackend;
-import com.fossgalaxy.bot.backend.netty.NettyTelnetServerBackend;
+import com.fossgalaxy.bot.backend.netty.*;
 import com.fossgalaxy.bot.config.ConfigFactory;
 import com.fossgalaxy.bot.examples.IRCModule;
 import com.fossgalaxy.bot.impl.processor.CommandParser;
+import com.fossgalaxy.bot.model.MUCStorage;
+import com.fossgalaxy.bot.model.MultiUserChat;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.configuration2.ImmutableConfiguration;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,7 +37,37 @@ public class App
         //create an interactive prompt for the bot
         Dispatcher dispatcher = new Dispatcher(new CommandParser(), catalogue);
 
+        final MUCStorage store = new MUCStorage();
+
         EventDispatcher<IRCEvent> ircEvent = new EventDispatcher<>();
+
+        ircEvent.register("JOIN", (ircEvent1 -> {
+            MultiUserChat muc = store.getChat("irc", ircEvent1.args.get(0));
+            String nick = IRCEventHandler.mask2Nick(ircEvent1.prefix);
+            muc.addUser(nick);
+        }));
+
+        ircEvent.register("PART", (ircEvent1 -> {
+            MultiUserChat muc = store.getChat("irc", ircEvent1.args.get(0));
+            String nick = IRCEventHandler.mask2Nick(ircEvent1.prefix);
+            muc.removeUser(nick);
+        }));
+
+        ircEvent.register("QUIT", (ircEvent1 -> {
+            String nick = IRCEventHandler.mask2Nick(ircEvent1.prefix);
+            store.removeFromAll(nick);
+        }));
+
+        ircEvent.register("353", (ircEvent1 -> {
+
+            String[] nicks = ircEvent1.args.get(3).split(" ");
+            System.out.println("got IRC names: "+ Arrays.toString(nicks));
+
+            MultiUserChat room = store.getChat("irc", ircEvent1.args.get(2));
+            for (String nick : nicks) {
+                room.addUser(nick);
+            }
+        }));
 
 
         //backends.add(new TelnetBackend(dispatcher));
@@ -45,7 +75,7 @@ public class App
         //backends.add(new ConsoleBackend(dispatcher));
         backends.add(new NettyIRCClientBackend("irc.freenode.net", 6667, ircEvent, dispatcher));
 
-        Module ircModule = new IRCModule(backends.get(0));
+        Module ircModule = new IRCModule(backends.get(0), store);
         ircModule.init();
         catalogue.register("irc", ircModule);
 

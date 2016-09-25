@@ -24,6 +24,7 @@ public class IRCEventHandler extends SimpleChannelInboundHandler<IRCEvent> {
     protected void channelRead0(ChannelHandlerContext ctx, IRCEvent s) throws Exception {
 
         System.out.println(s);
+        eventDispatcher.fire(s.command, s);
 
         switch (s.command) {
             case "PRIVMSG":
@@ -33,8 +34,6 @@ public class IRCEventHandler extends SimpleChannelInboundHandler<IRCEvent> {
                 ctx.writeAndFlush(String.format("PONG :%s\r\n", s.args.get(0)));
                 break;
         }
-
-        eventDispatcher.fire(s.command, s);
 
     }
 
@@ -67,7 +66,7 @@ public class IRCEventHandler extends SimpleChannelInboundHandler<IRCEvent> {
         }
     }
 
-    public String mask2Nick(String mask) {
+    public static String mask2Nick(String mask) {
         return mask.split("!")[0];
     }
 }

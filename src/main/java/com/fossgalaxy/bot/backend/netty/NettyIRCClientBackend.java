@@ -63,6 +63,7 @@ public class NettyIRCClientBackend implements Backend {
 
             sendRaw(f.channel(), "NICK uc_squab2");
             sendRaw(f.channel(), "USER squab 0 unused :FOSSGalaxy Squab bot");
+            sendRaw(f.channel(), "JOIN #fossgalaxy-bots");
 
             f.channel().closeFuture().sync();
 

@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  * Created by webpigeon on 25/09/16.
  */
 public class EventDispatcher<T> {
-    private Map<String, List<Consumer<T>>> callbacks;
+    private final Map<String, List<Consumer<T>>> callbacks;
 
     public EventDispatcher() {
         this.callbacks = new HashMap<>();
@@ -23,6 +23,7 @@ public class EventDispatcher<T> {
         List<Consumer<T>> consumers = callbacks.get(event);
         if (consumers == null) {
             consumers = new ArrayList<>();
+            callbacks.put(event, consumers);
         }
         consumers.add(consumer);
     }
