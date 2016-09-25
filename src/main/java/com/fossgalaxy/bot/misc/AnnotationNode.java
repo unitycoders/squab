@@ -5,13 +5,13 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * Created by webpigeon on 25/09/16.
+ * An action executed using reflection.
  */
-public class AnnotationNode implements Action {
-    private Module parent;
-    private Method method;
+class AnnotationNode implements Action {
+    private final Module parent;
+    private final Method method;
 
-    public AnnotationNode(Module parent, Method method) {
+    AnnotationNode(Module parent, Method method) {
         this.parent = parent;
         this.method = method;
     }

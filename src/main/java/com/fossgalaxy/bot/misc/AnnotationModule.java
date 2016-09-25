@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by webpigeon on 25/09/16.
+ * A module which uses Annotations discover actions and reflection to execute actions.
  */
 public class AnnotationModule implements Module {
     private final String name;

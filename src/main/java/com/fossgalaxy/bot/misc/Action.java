@@ -3,7 +3,9 @@ package com.fossgalaxy.bot.misc;
 import java.util.Map;
 
 /**
- * Created by webpigeon on 25/09/16.
+ * A single `unit of work' for the bot.
+ *
+ * This represents a task that the bot should aim to complete.
  */
 @FunctionalInterface
 public interface Action {

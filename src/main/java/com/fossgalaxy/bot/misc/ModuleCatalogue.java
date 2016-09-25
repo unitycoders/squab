@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by webpigeon on 25/09/16.
+ * A collection of Modules which are currently loaded by the bot.
+ *
+ * @see Module
  */
 public class ModuleCatalogue {
     private final Map<String, Module> modules;
