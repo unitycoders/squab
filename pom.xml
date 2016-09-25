@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.fossgalaxy.bot</groupId>
-  <artifactId>bot-core</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>squab</artifactId>
+  <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>bot-core</name>
-  <url>http://maven.apache.org</url>
+  <url>http://sites.fossgalaxy.com/squab</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
