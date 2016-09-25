@@ -32,15 +32,4 @@ public class App
         ConsoleBackend backend = new ConsoleBackend(dispatcher);
         backend.run();
     }
-
-    public static void doRequest(Context context, Request request, ModuleCatalogue catalogue) {
-
-        Module module = catalogue.get(request.getModule());
-        if (module == null) {
-            throw new InvalidRequestException(request.getModule());
-        }
-
-        Response resp = module.execute(context, request);
-        System.out.println(resp.getOutput());
-    }
 }
