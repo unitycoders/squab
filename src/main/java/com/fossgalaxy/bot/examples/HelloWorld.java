@@ -15,7 +15,7 @@ public class HelloWorld extends AnnotationModule {
     }
 
     @Command("hello")
-    public String myCommand(Map map, Object request){
+    public String doHello(Map map, Object request){
         return "hello world";
     }
 

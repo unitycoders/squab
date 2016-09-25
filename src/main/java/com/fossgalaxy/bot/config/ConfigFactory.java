@@ -15,12 +15,12 @@ import java.io.InputStream;
  */
 public class ConfigFactory {
 
-    public static ImmutableConfiguration getConfiguration(){
+    public static ImmutableConfiguration getConfiguration(String filename){
         Parameters params = new Parameters();
         FileBasedConfigurationBuilder<PropertiesConfiguration> builder =
                 new FileBasedConfigurationBuilder<>(PropertiesConfiguration.class)
                         .configure(params.properties()
-                                .setFileName("config.properties")
+                                .setFileName(filename)
                                 .setListDelimiterHandler(new DefaultListDelimiterHandler(','))
                                 .setIncludesAllowed(true)
                         );

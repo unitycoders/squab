@@ -16,25 +16,16 @@ import java.util.List;
  */
 public class App 
 {
-    public static void main( String[] args ) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-
-        ImmutableConfiguration cfg = ConfigFactory.getConfiguration();
+    public static void main( String[] args ) {
+        //read in our configuration file
+        ImmutableConfiguration cfg = ConfigFactory.getConfiguration("config.properties");
         List<String> modules = cfg.getList(String.class, "modules");
-        System.out.println(modules);
-        System.out.println(cfg.getString("username"));
 
-
-        Module hello = new HelloWorld();
-        hello.init();
-
+        //create a place to store the modules and load them in
         ModuleCatalogue catalogue = new ModuleCatalogue();
-        for (String moduleName : modules) {
-            Class<?> moduleClazz = Class.forName(moduleName);
-            Module module = (Module)moduleClazz.newInstance();
-            module.init();
-            catalogue.register(module.getName(), module);
-        }
+        modules.forEach(catalogue::load);
 
+        //test that a dummy call works
         System.out.println( catalogue.get("hello").execute(null, null) );
     }
 }
