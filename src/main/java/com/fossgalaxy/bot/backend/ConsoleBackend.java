@@ -15,18 +15,20 @@ public class ConsoleBackend implements Backend {
     private final Scanner scanner;
     private final PrintStream output;
     private final Dispatcher dispatcher;
+    private boolean shutdownRequested;
 
     public ConsoleBackend( Dispatcher dispatcher ) {
         this.scanner = new Scanner(System.in);
         this.output = System.out;
         this.dispatcher = dispatcher;
+        this.shutdownRequested = false;
     }
 
     @Override
     public void run() {
 
         output.print("bot> ");
-        while(scanner.hasNextLine()) {
+        while(scanner.hasNextLine() && !shutdownRequested) {
             try {
                 Context context = new DefaultContext();
                 context.put(Context.USER, "consoleUser");
@@ -40,5 +42,11 @@ public class ConsoleBackend implements Backend {
             output.print("bot> ");
         }
 
+    }
+
+    @Override
+    public void terminate() {
+        shutdownRequested = true;
+        scanner.close();
     }
 }

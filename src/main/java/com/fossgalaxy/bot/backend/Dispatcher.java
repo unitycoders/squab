@@ -16,9 +16,8 @@ public class Dispatcher {
         this.catalogue = catalogue;
     }
 
-    public Response dispatch(Context ctx, String input) {
+    public synchronized Response dispatch(Context ctx, String input) {
         Request request = parser.parse(input);
-
 
         Module module = catalogue.get(request.getModule());
         if (module == null) {

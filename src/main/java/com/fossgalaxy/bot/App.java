@@ -12,6 +12,7 @@ import com.fossgalaxy.bot.impl.DefaultRequest;
 import com.fossgalaxy.bot.impl.processor.CommandParser;
 import org.apache.commons.configuration2.ImmutableConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ import java.util.List;
  */
 public class App 
 {
+    private static final List<Backend> backends = new ArrayList<>();
+
     public static void main( String[] args ) {
         //read in our configuration file
         ImmutableConfiguration cfg = ConfigFactory.getConfiguration("config.properties");
@@ -32,13 +35,17 @@ public class App
         //create an interactive prompt for the bot
         Dispatcher dispatcher = new Dispatcher(new CommandParser(), catalogue);
 
-        Thread[] threads = new Thread[] {
-                new Thread(new TelnetBackend(dispatcher)),
-                new Thread(new ConsoleBackend(dispatcher))
-        };
+        backends.add(new TelnetBackend(dispatcher));
+        backends.add(new ConsoleBackend(dispatcher));
 
-        for (Thread thread : threads) {
-            thread.start();
+        for (Backend backend : backends) {
+            new Thread(backend).start();
+        }
+    }
+
+    public static void shutdownBot() {
+        for (Backend backend : backends) {
+            backend.terminate();
         }
     }
 }

@@ -28,7 +28,7 @@ public class TelnetWorker implements Runnable {
     @Override
     public void run() {
         output.print("bot> ");
-           while (scanner.hasNextLine()) {
+           while (scanner.hasNextLine() && !Thread.interrupted()) {
                try {
                     Context context = new DefaultContext();
                     context.put(Context.USER, "consoleUser");
@@ -42,5 +42,9 @@ public class TelnetWorker implements Runnable {
                 output.print("bot> ");
             }
 
+    }
+
+    public void terminate() {
+        scanner.close();
     }
 }

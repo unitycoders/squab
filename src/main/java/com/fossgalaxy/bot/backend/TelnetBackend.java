@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -20,10 +22,12 @@ import java.util.concurrent.Executors;
 public class TelnetBackend implements Backend {
     private final Dispatcher dispatcher;
     private final ExecutorService pool;
+    private final List<TelnetWorker> workers;
 
     public TelnetBackend(Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
         this.pool = Executors.newCachedThreadPool();
+        this.workers = new ArrayList<>();
     }
 
     @Override
@@ -42,5 +46,13 @@ public class TelnetBackend implements Backend {
             ex.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void terminate() {
+        for (TelnetWorker worker : workers) {
+            worker.terminate();
+        }
+        pool.shutdownNow();
     }
 }
