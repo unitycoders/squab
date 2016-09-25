@@ -1,9 +1,10 @@
-package com.fossgalaxy.bot.backend.netty;
+package com.fossgalaxy.bot.backend.netty.irc;
 
 import com.fossgalaxy.bot.api.Context;
 import com.fossgalaxy.bot.api.InvalidRequestException;
 import com.fossgalaxy.bot.api.Response;
 import com.fossgalaxy.bot.backend.Dispatcher;
+import com.fossgalaxy.bot.backend.netty.EventDispatcher;
 import com.fossgalaxy.bot.impl.DefaultContext;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

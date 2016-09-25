@@ -1,22 +1,17 @@
-package com.fossgalaxy.bot.backend.netty;
+package com.fossgalaxy.bot.backend.netty.irc;
 
 import com.fossgalaxy.bot.backend.Backend;
 import com.fossgalaxy.bot.backend.Dispatcher;
+import com.fossgalaxy.bot.backend.netty.EventDispatcher;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.Delimiters;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
-
-import java.nio.charset.Charset;
 
 /**
  * Created by webpigeon on 25/09/16.

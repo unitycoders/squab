@@ -1,4 +1,4 @@
-package com.fossgalaxy.bot.backend.netty;
+package com.fossgalaxy.bot.backend.netty.telnet;
 
 import com.fossgalaxy.bot.backend.Backend;
 import com.fossgalaxy.bot.backend.Dispatcher;

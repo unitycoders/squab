@@ -1,4 +1,4 @@
-package com.fossgalaxy.bot.backend.netty;
+package com.fossgalaxy.bot.backend.netty.irc;
 
 import java.util.List;
 

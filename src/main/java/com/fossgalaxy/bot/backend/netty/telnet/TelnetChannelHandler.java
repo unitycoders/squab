@@ -1,4 +1,4 @@
-package com.fossgalaxy.bot.backend.netty;
+package com.fossgalaxy.bot.backend.netty.telnet;
 
 import com.fossgalaxy.bot.api.Context;
 import com.fossgalaxy.bot.api.InvalidRequestException;

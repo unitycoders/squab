@@ -4,15 +4,16 @@ import com.fossgalaxy.bot.api.Module;
 import com.fossgalaxy.bot.api.module.ModuleCatalogue;
 import com.fossgalaxy.bot.backend.*;
 import com.fossgalaxy.bot.backend.netty.*;
+import com.fossgalaxy.bot.backend.netty.irc.IRCEvent;
+import com.fossgalaxy.bot.backend.netty.irc.IRCEventHandler;
+import com.fossgalaxy.bot.backend.netty.irc.NettyIRCClientBackend;
 import com.fossgalaxy.bot.config.ConfigFactory;
 import com.fossgalaxy.bot.examples.IRCModule;
 import com.fossgalaxy.bot.impl.processor.CommandParser;
 import com.fossgalaxy.bot.model.MUCStorage;
 import com.fossgalaxy.bot.model.MultiUserChat;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.configuration2.ImmutableConfiguration;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
