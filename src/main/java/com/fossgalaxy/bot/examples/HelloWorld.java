@@ -1,9 +1,9 @@
 package com.fossgalaxy.bot.examples;
 
 import com.fossgalaxy.bot.Command;
-import com.fossgalaxy.bot.misc.AnnotationModule;
+import com.fossgalaxy.bot.misc.*;
 
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * Created by webpigeon on 25/09/16.
@@ -15,8 +15,20 @@ public class HelloWorld extends AnnotationModule {
     }
 
     @Command("hello")
-    public String myCommand(Map map, Object request){
-        return "hello world";
+    public Response doHello(Context map, Request request){
+        return Shortcuts.respond("hello world");
+    }
+
+    @Command("helloFormat")
+    public Response doFormat(Context map, Request request){
+        return Shortcuts.respondFormatted("hello %s", map.get(Context.USER));
+    }
+
+    @Command("helloTemplate")
+    public Response doTemplate(Context map, Request request){
+        map.put("data", Utils.chooseOne(Arrays.asList("red", "orange", "blue", "purple")));
+
+        return Shortcuts.respondWith("hello ${user}, Today's colour is ${data}.", map);
     }
 
 }
