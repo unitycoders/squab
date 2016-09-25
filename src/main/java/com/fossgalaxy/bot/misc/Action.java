@@ -1,7 +1,5 @@
 package com.fossgalaxy.bot.misc;
 
-import java.util.Map;
-
 /**
  * A single `unit of work' for the bot.
  *
@@ -10,6 +8,6 @@ import java.util.Map;
 @FunctionalInterface
 public interface Action {
 
-    String invoke(Map context, Object request);
+    Response invoke(Context ctx, Request request);
 
 }

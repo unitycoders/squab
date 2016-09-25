@@ -17,11 +17,11 @@ public interface Module {
     /**
      * Process a request from a user and generates a response.
      *
-     * @param map
-     * @param object
+     * @param ctx
+     * @param request
      * @return
      */
-    String execute(Map map, Object object);
+    Response execute(Context ctx, Request request);
 
     /**
      * Get the human readable name for this module.

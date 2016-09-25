@@ -17,9 +17,9 @@ class AnnotationNode implements Action {
     }
 
     @Override
-    public String invoke(Map context, Object request) {
+    public Response invoke(Context context, Request request) {
         try {
-            return (String)method.invoke(parent, context, request);
+            return (Response)method.invoke(parent, context, request);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

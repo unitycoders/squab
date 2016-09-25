@@ -24,8 +24,8 @@ public class AnnotationModule implements Module {
     }
 
     @Override
-    public String execute(Map context, Object request) {
-        String action = "hello";
+    public Response execute(Context context, Request request) {
+        String action = request.getAction();
 
         AnnotationNode node = methods.get(action);
         if (node == null){
