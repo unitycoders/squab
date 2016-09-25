@@ -1,4 +1,4 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.api;
 
 import java.nio.charset.StandardCharsets;
 

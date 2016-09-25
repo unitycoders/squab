@@ -1,4 +1,4 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.api;
 
 /**
  * Created by webpigeon on 25/09/16.

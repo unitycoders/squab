@@ -1,7 +1,11 @@
 package com.fossgalaxy.bot.examples;
 
-import com.fossgalaxy.bot.Command;
-import com.fossgalaxy.bot.misc.*;
+import com.fossgalaxy.bot.api.Command;
+import com.fossgalaxy.bot.api.Context;
+import com.fossgalaxy.bot.api.Request;
+import com.fossgalaxy.bot.api.Response;
+import com.fossgalaxy.bot.api.module.AnnotationModule;
+import com.fossgalaxy.bot.api.module.Shortcuts;
 
 import java.util.Arrays;
 

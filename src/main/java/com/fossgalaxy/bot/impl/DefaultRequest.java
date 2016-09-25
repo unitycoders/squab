@@ -1,4 +1,6 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.impl;
+
+import com.fossgalaxy.bot.api.Request;
 
 /**
  * Created by webpigeon on 25/09/16.

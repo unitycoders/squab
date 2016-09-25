@@ -1,4 +1,4 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.api;
 
 /**
  * A single `unit of work' for the bot.

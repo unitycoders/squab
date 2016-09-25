@@ -1,5 +1,7 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.impl;
 
+import com.fossgalaxy.bot.api.Context;
+import com.fossgalaxy.bot.api.Response;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 /**

@@ -1,9 +1,8 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.impl;
 
-import java.util.Collection;
+import com.fossgalaxy.bot.api.Context;
+
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by webpigeon on 25/09/16.

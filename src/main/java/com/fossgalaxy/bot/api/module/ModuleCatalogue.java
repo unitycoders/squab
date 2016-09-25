@@ -1,4 +1,6 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.api.module;
+
+import com.fossgalaxy.bot.api.Module;
 
 import java.util.HashMap;
 import java.util.Map;

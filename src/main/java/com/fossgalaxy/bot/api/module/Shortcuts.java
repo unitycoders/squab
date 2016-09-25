@@ -1,4 +1,10 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.api.module;
+
+import com.fossgalaxy.bot.api.Context;
+import com.fossgalaxy.bot.api.Response;
+import com.fossgalaxy.bot.impl.ContextResponse;
+import com.fossgalaxy.bot.impl.TemplateResponse;
+import com.fossgalaxy.bot.impl.TextResponse;
 
 /**
  * Created by webpigeon on 25/09/16.

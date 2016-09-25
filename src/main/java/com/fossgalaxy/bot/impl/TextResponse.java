@@ -1,4 +1,6 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.impl;
+
+import com.fossgalaxy.bot.api.Response;
 
 /**
  * Respond to a request with a string

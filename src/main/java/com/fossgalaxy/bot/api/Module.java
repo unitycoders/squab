@@ -1,6 +1,4 @@
-package com.fossgalaxy.bot.misc;
-
-import java.util.Map;
+package com.fossgalaxy.bot.api;
 
 /**
  * A collection of logically related Actions.

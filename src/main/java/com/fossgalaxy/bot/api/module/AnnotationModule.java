@@ -1,6 +1,6 @@
-package com.fossgalaxy.bot.misc;
+package com.fossgalaxy.bot.api.module;
 
-import com.fossgalaxy.bot.Command;
+import com.fossgalaxy.bot.api.*;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import java.lang.reflect.Method;
