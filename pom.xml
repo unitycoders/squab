@@ -37,6 +37,7 @@
 
   <build>
     <plugins>
+
       <!-- other bits here -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -72,6 +73,14 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+
+    <!-- netty -->
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.5.Final</version>
+      <scope>compile</scope>
     </dependency>
 
     <!-- Apache Commons -->

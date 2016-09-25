@@ -1,14 +1,9 @@
 package com.fossgalaxy.bot;
 
-import com.fossgalaxy.bot.api.*;
 import com.fossgalaxy.bot.api.module.ModuleCatalogue;
-import com.fossgalaxy.bot.backend.Backend;
-import com.fossgalaxy.bot.backend.ConsoleBackend;
-import com.fossgalaxy.bot.backend.Dispatcher;
-import com.fossgalaxy.bot.backend.TelnetBackend;
+import com.fossgalaxy.bot.backend.*;
+import com.fossgalaxy.bot.backend.netty.NettyTelnetServerBackend;
 import com.fossgalaxy.bot.config.ConfigFactory;
-import com.fossgalaxy.bot.impl.DefaultContext;
-import com.fossgalaxy.bot.impl.DefaultRequest;
 import com.fossgalaxy.bot.impl.processor.CommandParser;
 import org.apache.commons.configuration2.ImmutableConfiguration;
 
@@ -35,7 +30,8 @@ public class App
         //create an interactive prompt for the bot
         Dispatcher dispatcher = new Dispatcher(new CommandParser(), catalogue);
 
-        backends.add(new TelnetBackend(dispatcher));
+        //backends.add(new TelnetBackend(dispatcher));
+        backends.add(new NettyTelnetServerBackend(1337, dispatcher));
         backends.add(new ConsoleBackend(dispatcher));
 
         for (Backend backend : backends) {
