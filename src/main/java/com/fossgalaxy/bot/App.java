@@ -2,8 +2,10 @@ package com.fossgalaxy.bot;
 
 import com.fossgalaxy.bot.api.*;
 import com.fossgalaxy.bot.api.module.ModuleCatalogue;
+import com.fossgalaxy.bot.backend.Backend;
 import com.fossgalaxy.bot.backend.ConsoleBackend;
 import com.fossgalaxy.bot.backend.Dispatcher;
+import com.fossgalaxy.bot.backend.TelnetBackend;
 import com.fossgalaxy.bot.config.ConfigFactory;
 import com.fossgalaxy.bot.impl.DefaultContext;
 import com.fossgalaxy.bot.impl.DefaultRequest;
@@ -29,7 +31,14 @@ public class App
 
         //create an interactive prompt for the bot
         Dispatcher dispatcher = new Dispatcher(new CommandParser(), catalogue);
-        ConsoleBackend backend = new ConsoleBackend(dispatcher);
-        backend.run();
+
+        Thread[] threads = new Thread[] {
+                new Thread(new TelnetBackend(dispatcher)),
+                new Thread(new ConsoleBackend(dispatcher))
+        };
+
+        for (Thread thread : threads) {
+            thread.start();
+        }
     }
 }

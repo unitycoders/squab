@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * Created by webpigeon on 25/09/16.
  */
-public class ConsoleBackend implements Runnable {
+public class ConsoleBackend implements Backend {
     private final Scanner scanner;
     private final PrintStream output;
     private final Dispatcher dispatcher;
