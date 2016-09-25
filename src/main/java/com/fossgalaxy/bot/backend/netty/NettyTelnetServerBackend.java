@@ -65,6 +65,11 @@ public class NettyTelnetServerBackend implements Backend {
     }
 
     @Override
+    public void sendRaw(String input) {
+
+    }
+
+    @Override
     public void terminate() {
 
     }

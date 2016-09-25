@@ -7,5 +7,6 @@ import java.util.Map;
  */
 public interface Context extends Map<String, Object> {
     String USER = "user";
-
+    String TARGET = "target";
+    String REPLY_TO = "reply";
 }

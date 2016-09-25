@@ -5,5 +5,6 @@ package com.fossgalaxy.bot.backend;
  */
 public interface Backend extends Runnable {
 
+    void sendRaw(String input);
     void terminate();
 }

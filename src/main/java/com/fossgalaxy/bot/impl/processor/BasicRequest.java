@@ -32,6 +32,11 @@ import java.util.Arrays;
         return tokens[1];
     }
 
+    @Override
+    public String getArgument(int i) {
+        return tokens[i+2];
+    }
+
     public String toString() {
         return Arrays.toString(tokens);
     }

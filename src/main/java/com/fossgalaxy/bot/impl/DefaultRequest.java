@@ -24,4 +24,9 @@ public class DefaultRequest implements Request {
     public String getAction() {
         return action;
     }
+
+    @Override
+    public String getArgument(int i) {
+        return null;
+    }
 }

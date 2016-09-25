@@ -45,6 +45,11 @@ public class ConsoleBackend implements Backend {
     }
 
     @Override
+    public void sendRaw(String input) {
+        output.println(input);
+    }
+
+    @Override
     public void terminate() {
         shutdownRequested = true;
         scanner.close();

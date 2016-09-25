@@ -49,6 +49,11 @@ public class TelnetBackend implements Backend {
     }
 
     @Override
+    public void sendRaw(String input) {
+
+    }
+
+    @Override
     public void terminate() {
         for (TelnetWorker worker : workers) {
             worker.terminate();

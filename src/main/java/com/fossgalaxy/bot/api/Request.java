@@ -8,4 +8,6 @@ public interface Request {
 
     String getModule();
     String getAction();
+
+    String getArgument(int i);
 }
