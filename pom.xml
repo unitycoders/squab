@@ -7,7 +7,7 @@
   <version>0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>bot-core</name>
+  <name>Squab</name>
   <url>http://sites.fossgalaxy.com/squab</url>
 
   <properties>
