@@ -48,7 +48,7 @@ public class NettyIRCClientBackend implements Backend {
                     ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
                     ch.pipeline().addLast(new StringDecoder(CharsetUtil.UTF_8));
                     ch.pipeline().addLast(new StringEncoder(CharsetUtil.UTF_8));
-                    ch.pipeline().addLast(new IRCChannelHandler());
+                    ch.pipeline().addLast(new MessageParser());
                     ch.pipeline().addLast(new IRCEventHandler(dispatcher, eventDispatcher));
                 }
             });

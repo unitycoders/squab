@@ -7,17 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by webpigeon on 25/09/16.
+ * Split an IRC message up into it's prefix, command and arguments.
  */
-public class IRCChannelHandler extends MessageToMessageDecoder<String> {
+public class MessageParser extends MessageToMessageDecoder<String> {
 
     @Override
-    protected void decode(ChannelHandlerContext channelHandlerContext, String s, List<Object> list) throws Exception {
-        list.add(split(s));
-    }
+    protected void decode(ChannelHandlerContext channelHandlerContext, String msg, List<Object> list) throws Exception {
 
-
-    public IRCEvent split(String msg) {
         List<String> parts = new ArrayList<>();
 
         int start = 0;
@@ -48,9 +44,9 @@ public class IRCChannelHandler extends MessageToMessageDecoder<String> {
         parts.add(buff.toString());
 
         if (prefix) {
-            return new IRCEvent(parts.get(0), parts.get(1), parts.subList(2, parts.size()));
+            list.add(new IRCEvent(parts.get(0), parts.get(1), parts.subList(2, parts.size())));
         } else {
-            return new IRCEvent(null, parts.get(0), parts.subList(1, parts.size()));
+            list.add(new IRCEvent(null, parts.get(0), parts.subList(1, parts.size())));
         }
     }
 

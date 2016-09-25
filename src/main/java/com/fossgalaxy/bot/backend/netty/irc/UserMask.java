@@ -1,12 +1,13 @@
 package com.fossgalaxy.bot.backend.netty.irc;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by webpigeon on 25/09/16.
  */
-public class UserMask {
+public class UserMask implements Serializable {
     public final String nick;
     public final String username;
     public final String host;

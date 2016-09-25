@@ -8,7 +8,7 @@ import java.util.List;
 public class IRCEvent {
     public final String prefix;
     public final String command;
-    public final List<String> args;
+    private final List<String> args;
 
     public IRCEvent(String prefix, String command, List<String> args) {
         this.prefix = prefix;
@@ -20,4 +20,7 @@ public class IRCEvent {
         return String.format("[%s]: %s(%s)", prefix, command, args);
     }
 
+    public String getArg(int i) {
+        return args.get(i);
+    }
 }

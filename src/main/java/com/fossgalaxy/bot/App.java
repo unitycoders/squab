@@ -4,6 +4,7 @@ import com.fossgalaxy.bot.api.Module;
 import com.fossgalaxy.bot.api.module.ModuleCatalogue;
 import com.fossgalaxy.bot.backend.*;
 import com.fossgalaxy.bot.backend.netty.*;
+import com.fossgalaxy.bot.backend.netty.irc.ChannelMonitor;
 import com.fossgalaxy.bot.backend.netty.irc.IRCEvent;
 import com.fossgalaxy.bot.backend.netty.irc.IRCEventHandler;
 import com.fossgalaxy.bot.backend.netty.irc.NettyIRCClientBackend;
@@ -40,41 +41,19 @@ public class App
 
         final MUCStorage store = new MUCStorage();
 
-        EventDispatcher<IRCEvent> ircEvent = new EventDispatcher<>();
+        //IRC housekeeping stuff
+        EventDispatcher<IRCEvent> ircDispatcher = new EventDispatcher<>();
+        ChannelMonitor ircChannelMonitor = new ChannelMonitor(store);
+        ircChannelMonitor.bind(ircDispatcher);
 
-        ircEvent.register("JOIN", (ircEvent1 -> {
-            MultiUserChat muc = store.getChat("irc", ircEvent1.args.get(0));
-            String nick = IRCEventHandler.mask2Nick(ircEvent1.prefix);
-            muc.addUser(nick);
-        }));
-
-        ircEvent.register("PART", (ircEvent1 -> {
-            MultiUserChat muc = store.getChat("irc", ircEvent1.args.get(0));
-            String nick = IRCEventHandler.mask2Nick(ircEvent1.prefix);
-            muc.removeUser(nick);
-        }));
-
-        ircEvent.register("QUIT", (ircEvent1 -> {
-            String nick = IRCEventHandler.mask2Nick(ircEvent1.prefix);
-            store.removeFromAll(nick);
-        }));
-
-        ircEvent.register("353", (ircEvent1 -> {
-
-            String[] nicks = ircEvent1.args.get(3).split(" ");
-            System.out.println("got IRC names: "+ Arrays.toString(nicks));
-
-            MultiUserChat room = store.getChat("irc", ircEvent1.args.get(2));
-            for (String nick : nicks) {
-                room.addUser(nick);
-            }
-        }));
-
+        //show privmsg events in terminal (demo IRC specific callbacks)
+        ircDispatcher.register("PRIVMSG", event -> System.out.println(event) );
+        ircDispatcher.register("NOTICE", event -> System.out.println(event) );
 
         //backends.add(new TelnetBackend(dispatcher));
         //backends.add(new NettyTelnetServerBackend(1337, dispatcher));
         //backends.add(new ConsoleBackend(dispatcher));
-        backends.add(new NettyIRCClientBackend("irc.freenode.net", 6667, ircEvent, dispatcher));
+        backends.add(new NettyIRCClientBackend("irc.freenode.net", 6667, ircDispatcher, dispatcher));
 
         Module ircModule = new IRCModule(backends.get(0), store);
         ircModule.init();
