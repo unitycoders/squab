@@ -26,10 +26,11 @@ public class AnnotationModule implements Module {
     @Override
     public Response execute(Context context, Request request) {
         String action = request.getAction();
+        assert action != null;
 
         AnnotationNode node = methods.get(action);
         if (node == null){
-            return null;
+            throw new InvalidRequestException(getName(), action);
         }
 
         return node.invoke(context, request);

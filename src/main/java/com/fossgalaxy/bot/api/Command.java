@@ -16,5 +16,5 @@ public @interface Command {
      *
      * @return
      */
-    String value();
+    String value() default "default";
 }

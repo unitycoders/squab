@@ -18,6 +18,11 @@ public class HelloWorld extends AnnotationModule {
         super("hello");
     }
 
+    @Command
+    public Response doDefault(Context ctx, Request request) {
+        return Shortcuts.respond("default action!");
+    }
+
     @Command("hello")
     public Response doHello(Context map, Request request){
         return Shortcuts.respond("hello world");

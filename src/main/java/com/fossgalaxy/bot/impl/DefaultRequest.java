@@ -16,6 +16,11 @@ public class DefaultRequest implements Request {
     }
 
     @Override
+    public String getModule() {
+        return module;
+    }
+
+    @Override
     public String getAction() {
         return action;
     }
