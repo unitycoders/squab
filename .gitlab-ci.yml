@@ -79,7 +79,7 @@ package:jdk8:
   # Use stage test here, so the pages job may later pickup the created site.
   stage: test
   script:
-    - 'mvn $MAVEN_CLI_OPTS package'
+    - 'mvn $MAVEN_CLI_OPTS package site site:stage'
   only:
     - master
   # Archive up the built documentation site.
