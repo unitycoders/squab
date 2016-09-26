@@ -90,18 +90,18 @@ package:jdk8:
 
 
 ## Pages is enterise only until we develop a work-around
-#pages:
-#  image: busybox:latest
-#  stage: deploy
-#  script:
-#    # Because Maven appends the artifactId automatically to the staging path if you did define a parent pom,
-#    # you might need to use `mv target/staging/YOUR_ARTIFACT_ID public` instead.
-#    - mv target/staging public
-#  dependencies:
-#    - package:jdk8
-#  artifacts:
-#    paths:
-#    - public
-#  only:
-#    - master
+pages:
+  image: busybox:latest
+  stage: deploy
+  script:
+    # Because Maven appends the artifactId automatically to the staging path if you did define a parent pom,
+    # you might need to use `mv target/staging/YOUR_ARTIFACT_ID public` instead.
+    - mv target/staging public
+  dependencies:
+    - package:jdk8
+  artifacts:
+    paths:
+    - public
+  only:
+    - master
 
